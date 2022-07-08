@@ -36,8 +36,8 @@ char* id_val;
 
 %%
 
-prog_start: functions { printf("prog_start -> functions\n"); }
-	| error {yyerrok; yyclearin;} 
+prog_start: functions { printf("prog_start -> functions\n"); } 
+	| error {yyerrok; yyclearin;}
 	;
 
 functions: /*empty*/{printf("functions -> epsilon\n");}

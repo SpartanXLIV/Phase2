@@ -2,8 +2,10 @@
       /* cs152-miniL phase1 */
 %{
 /* write your C code here for definitions of variables and including headers */
+
 #include "y.tab.h"
-        int currLine = 1, currPos = 1;
+int currLine = 1, currPos = 1;
+
 %}
 
  /* some common rules */
@@ -28,7 +30,7 @@ COMMENT ##.*
 "endbody"           {return END_BODY; currPos += yyleng; }
 "integer"           {return INTEGER; currPos += yyleng; }
 "array"             {return ARRAY; currPos += yyleng; }
-"enum"              {return ENUM; currPos += yyleng; }
+
 "of"                {return OF; currPos += yyleng; }
 "if"                {return IF; currPos += yyleng; }
 "then"              {return THEN; currPos += yyleng; }
@@ -41,7 +43,7 @@ COMMENT ##.*
 "endloop"           {return ENDLOOP; currPos += yyleng; }
 "continue"          {return CONTINUE; currPos += yyleng; }
 "read"              {return READ; currPos += yyleng; }
-"write"             {return Write; currPos += yyleng; }
+"write"             {return WRITE; currPos += yyleng; }
 "and"               {return AND; currPos += yyleng; }
 "or"                {return OR; currPos += yyleng; }
 "not"               {return NOT; currPos += yyleng; }
@@ -55,9 +57,10 @@ COMMENT ##.*
 "*"            {currPos += yyleng; return MULT;}
 "/"            {currPos += yyleng; return DIV;}
 "%"            {currPos += yyleng; return MOD;}
-"_"            {currPos += yyleng; return UNDER_SCORE;}
 
-   /* Comparison Operators */ 
+
+
+   /*^^^no underscore  Comparison Operators */ 
 "=="           {currPos += yyleng; return EQ;}
 "<>"           {currPos += yyleng; return NEQ;}
 "<"            {currPos += yyleng; return LT;}
@@ -78,7 +81,7 @@ COMMENT ##.*
 
         /* make no sound, tip-toe across the floor*/
 
-(\.{DIGIT}+)|({DIGIT}+(\.{DIGIT}*)?([eE][+-]?[0-9]+)?)        {printf("NUMBER %s\n", yytext); currPos += yyleng;}
+(\.{DIGIT}+)|({DIGIT}+(\.{DIGIT}*)?([eE][+-]?[0-9]+)?)        {currPos += yyleng; return NUMBER;}
 
 [ \t]+          {/* ignore spaces */ currPos += yyleng;}
 
@@ -87,7 +90,7 @@ COMMENT ##.*
 {COMMENT}      	{currLine++; currPos = 1;}
 
 
-[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])*         {printf("IDENT %s\n", yytext); currPos += yyleng;}
+[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])*         {currPos += yyleng; return IDENT;}
 
 [0-9_][a-zA-Z0-9_]*		{printf("Error at line %d, column %d: identifier \"%s\" must begin with a letter\n", currLine, currPos, yytext); exit(0);}
 
