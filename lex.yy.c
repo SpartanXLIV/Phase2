@@ -1099,50 +1099,50 @@ YY_RULE_SETUP
 /* make no sound, tip-toe across the floor*/
 case 48:
 YY_RULE_SETUP
-#line 84 "miniL.lex"
-{currPos += yyleng; return NUMBER;}
+#line 85 "miniL.lex"
+{yylval.num_val = atoi(yytext); currPos += yyleng; return NUMBER;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 86 "miniL.lex"
+#line 89 "miniL.lex"
 {/* ignore spaces */ currPos += yyleng;}
 	YY_BREAK
 /* I'll be trapped and here I'll have to stay */
 case 50:
 YY_RULE_SETUP
-#line 90 "miniL.lex"
+#line 93 "miniL.lex"
 {currLine++; currPos = 1;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 93 "miniL.lex"
-{currPos += yyleng; return IDENT;}
+#line 97 "miniL.lex"
+{yylval.id_val = strdup(yytext); currPos += yyleng; return IDENT;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 95 "miniL.lex"
+#line 101 "miniL.lex"
 {printf("Error at line %d, column %d: identifier \"%s\" must begin with a letter\n", currLine, currPos, yytext); exit(0);}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 97 "miniL.lex"
+#line 103 "miniL.lex"
 {printf("Error at line %d, column %d: identifier \"%s\" cannot end with an underscore\n", currLine, currPos, yytext); exit(0);}
 	YY_BREAK
 /* Here they come, THOSE FEELINGS AGAIN*/
 case 54:
 /* rule 54 can match eol */
 YY_RULE_SETUP
-#line 101 "miniL.lex"
+#line 107 "miniL.lex"
 {currLine++; currPos = 1;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 103 "miniL.lex"
+#line 109 "miniL.lex"
 {printf("Error at line %d, column %d: unrecognized symbol \"%s\" \n", currLine, currPos, yytext); exit(0);}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 105 "miniL.lex"
+#line 111 "miniL.lex"
 ECHO;
 	YY_BREAK
 #line 1149 "lex.yy.c"
@@ -2139,7 +2139,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 105 "miniL.lex"
+#line 111 "miniL.lex"
 
 
 

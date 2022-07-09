@@ -80,8 +80,11 @@ COMMENT ##.*
 
 
         /* make no sound, tip-toe across the floor*/
+	
 
-(\.{DIGIT}+)|({DIGIT}+(\.{DIGIT}*)?([eE][+-]?[0-9]+)?)        {currPos += yyleng; return NUMBER;}
+(\.{DIGIT}+)|({DIGIT}+(\.{DIGIT}*)?([eE][+-]?[0-9]+)?)        {yylval.num_val = atoi(yytext); currPos += yyleng; return NUMBER;}
+
+	
 
 [ \t]+          {/* ignore spaces */ currPos += yyleng;}
 
@@ -89,8 +92,11 @@ COMMENT ##.*
 
 {COMMENT}      	{currLine++; currPos = 1;}
 
+	
 
-[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])*         {currPos += yyleng; return IDENT;}
+[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])*         {yylval.id_val = strdup(yytext); currPos += yyleng; return IDENT;}
+
+	
 
 [0-9_][a-zA-Z0-9_]*		{printf("Error at line %d, column %d: identifier \"%s\" must begin with a letter\n", currLine, currPos, yytext); exit(0);}
 

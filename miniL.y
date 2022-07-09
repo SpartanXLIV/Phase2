@@ -37,7 +37,6 @@ char* id_val;
 %%
 
 prog_start: functions { printf("prog_start -> functions\n"); } 
-	| error {yyerrok; yyclearin;}
 	;
 
 functions: /*empty*/{printf("functions -> epsilon\n");}
@@ -49,7 +48,6 @@ function: FUNCTION Ident SEMICOLON BEGIN_PARAMS declarations END_PARAMS BEGIN_LO
 
 declarations: /*empty*/ {printf("declarations -> epsilon\n");}
 	| declaration SEMICOLON declarations {printf("declarations -> declaration SEMICOLON declaration\n");}
-	| declaration error {yyerrok;}
 	;
 
 declaration: identifiers COLON INTEGER {printf("declaration -> identifiers COLON INTEGER\n");}
@@ -65,7 +63,6 @@ Ident: IDENT {printf("Ident -> IDENT %s\n", $1);}
 
 statements: /*empty*/ {printf("statements -> epsilon\n");}
 	| statement SEMICOLON statements {printf("statements -> statement SEMICOLON statements\n");}
-	| statement error {yyerrok;}
 	;
 
 statement: var ASSIGN expression {printf("statement -> var ASSIGN expression\n");}
@@ -108,7 +105,6 @@ comp:		EQ {printf("comp -> EQ\n");}
 		;
 
 expression:	multi_expr addSubExpr {printf("expression -> multi_exp addSubExpr\n");}
-		| error {yyerrok;}
 		;
 
 addSubExpr:	/*empty*/ {printf("addSubExpr -> epsilon\n");}
@@ -136,7 +132,7 @@ expressionLoop:	/*empty*/
 		;
 
 var:		Ident {printf("var -> Ident\n");}
-		| Ident L_SQUARE_BRACKET expression R_SQUARE_BRACKET L_SQUARE_BRACKET expression R_SQUARE_BRACKET {printf("var -> Ident L_SQUARE_BRACKET expression R_SQUARE_BRACKET L_SQUARE_BRACKET expression R_SQUARE_BACKET\n");}
+		| Ident L_SQUARE_BRACKET expression R_SQUARE_BRACKET L_SQUARE_BRACKET expression R_SQUARE_BRACKET {printf("var -> ident L_SQUARE_BRACKET expression R_SQUARE_BRACKET L_SQUARE_BRACKET expression R_SQUARE_BACKET\n");}
 		| Ident L_SQUARE_BRACKET expression R_SQUARE_BRACKET {printf("var -> Ident L_SQSUARE_BRACKET expression R_SQUARE_BRACKET\n");}
 		;
 
