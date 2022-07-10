@@ -31,6 +31,8 @@ COMMENT ##.*
 "integer"           {return INTEGER; currPos += yyleng; }
 "array"             {return ARRAY; currPos += yyleng; }
 
+"enum"              {return ENUM; currPos += yyleng;}
+
 "of"                {return OF; currPos += yyleng; }
 "if"                {return IF; currPos += yyleng; }
 "then"              {return THEN; currPos += yyleng; }
